@@ -11,15 +11,17 @@ import FirebaseFirestore
 
 struct StudentList: View {
     @FirestoreQuery(collectionPath: "Students") var students:[Student]
-    @Binding var selectedStudent: String
+    @Binding var selectedStudent: Student
     var body: some View {
-        ForEach(students, id: \.name){student in
-            Button {
-                selectedStudent = student.name
-            } label: {
-                Text(student.name)
+        VStack{
+            ForEach(students, id: \.name){student in
+                Button {
+                    selectedStudent = student
+                } label: {
+                    Text(student.name)
+                }
+                
             }
-
         }
     }
 }
