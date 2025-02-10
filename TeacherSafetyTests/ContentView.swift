@@ -8,10 +8,11 @@
 import SwiftUI
 
 struct ContentView: View {
+    @State var selectedSorting = "student"
     var body: some View {
-        TeacherStudentSelectionOrganizer()
         NavigationStack{
-            NavigationLink(destination: TeacherStudentSelectionOrganizer()) {
+            NavigationLink(destination: TeacherStudentSelectionOrganizer(selectedSorting: $selectedSorting)) {
+                Text("select by student")
                 
             }
         }

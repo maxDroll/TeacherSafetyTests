@@ -9,13 +9,19 @@ import SwiftUI
 
 struct TeacherStudentSelectionOrganizer: View {
     @State var selectedStudent: Student = Student(AngleGrinderTest: -1, AngleGrinderVideo: false, Class: "XXXXX", LatheTest: -1, LatheVideo: false, MillTest: -1, MillVideo: false, WelderTest: -1, WelderVideo: false, name: "XXXXX", Teacher: false)
+    @Binding var selectedSorting: String
     var body: some View {
         HStack(spacing:0){
-            StudentList(selectedStudent: $selectedStudent)
-            Rectangle()
-                .foregroundStyle(.black)
-                .frame(width: 5, height: 1000)
-            StudentStats(selectedStudent: $selectedStudent)
+            if selectedSorting == "student"{
+                StudentList(selectedStudent: $selectedStudent)
+                Rectangle()
+                    .foregroundStyle(.black)
+                    .frame(width: 5, height: 1000)
+                StudentStats(selectedStudent: $selectedStudent)
+            }
+            else{
+                
+            }
         }
     }
 }
