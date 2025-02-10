@@ -36,5 +36,6 @@ struct StudentStats: View {
             }
 
         }
+        .frame(width: 700)
     }
 }
