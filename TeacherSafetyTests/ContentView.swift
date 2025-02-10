@@ -10,9 +10,11 @@ import SwiftUI
 struct ContentView: View {
     var body: some View {
         TeacherStudentSelectionOrganizer()
+        NavigationStack{
+            NavigationLink(destination: TeacherStudentSelectionOrganizer()) {
+                
+            }
+        }
     }
-}
-
-#Preview {
-    ContentView()
+    
 }
