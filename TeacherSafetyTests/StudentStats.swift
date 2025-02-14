@@ -13,16 +13,27 @@ struct StudentStats: View {
     @Binding var selectedStudent: Student
     let machines = ["Lathe", "Mille", "Welder", "Angle Grinder"]
     var body: some View {
-        VStack{
-            Rectangle()
-                .foregroundStyle(.black)
-                .frame(width: 700, height: 5)
-            machine(machineVideo: selectedStudent.LatheVideo, machineTest: selectedStudent.LatheTest, machineName: "Lathe")
-            machine(machineVideo: selectedStudent.MillVideo, machineTest: selectedStudent.MillTest, machineName: "Mill")
-            machine(machineVideo: selectedStudent.WelderVideo, machineTest: selectedStudent.WelderTest, machineName: "Welder")
-            machine(machineVideo: selectedStudent.AngleGrinderVideo, machineTest: selectedStudent.AngleGrinderTest, machineName: "Angle Grinder")
+        if selectedStudent.name == "XXXXX" && selectedStudent.Class == "XXXXX"{
+            Text("Please Select a Student")
+                .font(.largeTitle)
+                .frame(width:700)
+        }else{
+            VStack{
+                Text(selectedStudent.name)
+                    .frame(width:600,alignment: .trailing)
+                    .font(.title)
+                    .offset(y: 75)
+                Rectangle()
+                    .foregroundStyle(.black)
+                    .frame(width: 700, height: 5)
+                machine(machineVideo: selectedStudent.LatheVideo, machineTest: selectedStudent.LatheTest, machineName: "Lathe")
+                machine(machineVideo: selectedStudent.MillVideo, machineTest: selectedStudent.MillTest, machineName: "Mill")
+                machine(machineVideo: selectedStudent.WelderVideo, machineTest: selectedStudent.WelderTest, machineName: "Welder")
+                machine(machineVideo: selectedStudent.AngleGrinderVideo, machineTest: selectedStudent.AngleGrinderTest, machineName: "Angle Grinder")
+            }
+            .frame(width: 700)
+            .offset(y: -50)
         }
-        .frame(width: 700)
     }
     struct machine: View {
         let machineVideo: Bool
@@ -31,6 +42,7 @@ struct StudentStats: View {
         var body: some View {
             Text(machineName)
                 .font(.largeTitle)
+                .frame(height: 78)
             HStack{
                 VStack(spacing: 20){
                     Text("Video Status")
@@ -41,11 +53,13 @@ struct StudentStats: View {
                 .frame(width: 200)
                 VStack(spacing: 20){
                     if machineVideo{
-                        Text("Watched")
+                        Image(systemName: "checkmark.square")
                             .font(.title)
+                            .foregroundStyle(.green)
                     }else{
-                        Text("Not Watched")
+                        Image(systemName: "x.square")
                             .font(.title)
+                            .foregroundStyle(.red)
                     }
                     if machineTest == -1{
                         Text("Not Taken")
