@@ -13,8 +13,16 @@ struct ContentView: View {
         NavigationStack{
             NavigationLink(destination: TeacherStudentSelectionOrganizer(selectedSorting: $selectedSorting)) {
                 Text("select by student")
-                
             }
+            .simultaneousGesture(TapGesture().onEnded({ _ in
+                selectedSorting = "student"
+            }))
+            NavigationLink(destination: TeacherStudentSelectionOrganizer(selectedSorting: $selectedSorting)) {
+                Text("select by machine")
+            }
+            .simultaneousGesture(TapGesture().onEnded({ _ in
+                selectedSorting = "machine"
+            }))
         }
     }
     

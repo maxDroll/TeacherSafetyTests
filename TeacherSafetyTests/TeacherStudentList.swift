@@ -38,6 +38,7 @@ struct StudentList: View {
                                     Text(student.name)
                                         .frame(width: 450, height: 100, alignment: .leading)
                                         .font(.system(size: 30))
+                                        .foregroundStyle(.black)
                                     if selectedStudent.name == student.name && selectedStudent.Class == student.Class{
                                         Rectangle()
                                             .foregroundStyle(.blue)
