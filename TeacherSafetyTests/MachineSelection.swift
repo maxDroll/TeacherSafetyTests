@@ -13,18 +13,8 @@ struct MachineSelection: View {
     let machines = ["Lathe", "Mille", "Welder", "Angle Grinder"]
     @FirestoreQuery(collectionPath: "Students") var students:[Student]
     @Binding var selectedMachine: String
-    @State var selectedClass = ""
-    @State var updatedClass = ""
     var body: some View {
         VStack(spacing:0){
-            TextField("Enter Class", text: $selectedClass)
-                .offset(x: 15)
-                .onSubmit {
-                    updatedClass = selectedClass
-                }
-            Rectangle()
-                .foregroundStyle(.black)
-                .frame(width: 500, height: 5)
             ForEach(machines, id: \.self){machine in
                 Button {
                     selectedMachine = machine
@@ -32,21 +22,24 @@ struct MachineSelection: View {
                     ZStack{
                         if selectedMachine == machine{
                             Rectangle()
-                                .frame(width: 500, height: 175)
+                                .frame(width: 500, height: 203)
                                 .foregroundStyle(.blue)
                                 .opacity(0.3)
                         }
                         Text(machine)
-                            .font(.system(size: 50))
-                            .frame(width: 450, height: 175, alignment: .leading)
+                            .font(.system(size: 55))
+                            .frame(width: 450, height: 203, alignment: .leading)
                             .foregroundStyle(.black)
                     }
                 }
-                Rectangle()
-                    .foregroundStyle(.black)
-                    .frame(width: 500, height: 5)
+                if machine != "Angle Grinder"{
+                    Rectangle()
+                        .foregroundStyle(.black)
+                        .frame(width: 500, height: 5)
+                }
             }
         }
         .frame(width: 500)
+        .offset(y: -23)
     }
 }

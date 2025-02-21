@@ -22,6 +22,10 @@ struct TeacherStudentSelectionOrganizer: View {
             }
             else{
                 MachineSelection(selectedMachine: $selectedMachine)
+                Rectangle()
+                    .foregroundStyle(.black)
+                    .frame(width: 5, height: 1000)
+                StudentByMachine(selectedMachine: $selectedMachine)
             }
         }
     }
