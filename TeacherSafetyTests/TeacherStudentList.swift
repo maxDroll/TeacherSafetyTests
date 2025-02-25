@@ -18,6 +18,7 @@ struct StudentList: View {
         ScrollView(.vertical){
             TextField("Enter Class", text: $selectedClass)
                 .offset(x: 15)
+                .font(.title)
                 .onSubmit {
                     updatedClass = selectedClass
                 }
@@ -27,6 +28,7 @@ struct StudentList: View {
                     .frame(width: 500, height: 5)
                 if updatedClass == ""{
                     Text("Please Enter A Class Code")
+                        .font(.title)
                 }
                 VStack(alignment: .leading, spacing:0){
                     ForEach(students, id: \.name){student in

@@ -16,11 +16,12 @@ struct StudentByMachine: View {
     @State var updatedClass = ""
     @Binding var selectedMachine: String
     var body: some View {
-        ScrollView(.vertical){
-            VStack{
-                if selectedMachine != ""{
+        if selectedMachine != ""{
+            ScrollView(.vertical){
+                VStack(spacing:0){
                     TextField("Enter Class", text: $selectedClass)
                         .offset(x: 15)
+                        .font(.title)
                         .onSubmit {
                             updatedClass = selectedClass
                         }
@@ -28,7 +29,9 @@ struct StudentByMachine: View {
                         .foregroundStyle(.black)
                         .frame(width: 700, height: 5)
                     if updatedClass == ""{
-                        Text("Please Enter a Class")
+                        Spacer()
+                        Text("Please Enter a Class Code")
+                            .font(.title)
                     } else{
                         ForEach(students, id: \.name){Stud in
                             if Stud.Class == updatedClass{
@@ -38,31 +41,55 @@ struct StudentByMachine: View {
                                 case "Lathe": StudentStat(name: Stud.name, quiz: Stud.LatheTest, video: Stud.LatheVideo)
                                 default: StudentStat(name: Stud.name, quiz: Stud.WelderTest, video: Stud.WelderVideo)
                                 }
+                                Rectangle()
+                                    .foregroundStyle(.black)
+                                    .frame(width: 700, height: 5)
                             }
                         }
                     }
                 }
-                else{
-                    Text("Please Select a Machine")
-                }
             }
+            .frame(width: 700)
         }
-        .frame(width: 700)
+        else{
+            Text("Please Select a Machine")
+                .font(.largeTitle)
+                .frame(width: 700)
+        }
     }
     struct StudentStat: View {
         let name: String
         let quiz: Int
         let video: Bool
         var body: some View {
-            HStack{
+            VStack(spacing:10){
                 Text(name)
-                VStack{
-                    Text("Watched Quiz?")
-                    Text("Quiz Score")
-                }
-                VStack{
-                    Text("\(video)")
-                    Text("\(quiz)")
+                    .font(.largeTitle)
+                HStack(spacing:100){
+                    VStack{
+                        Text("Watched Quiz?")
+                            .font(.title)
+                        Text("Quiz Score")
+                            .font(.title)
+                    }
+                    VStack{
+                        if video{
+                            Image(systemName: "checkmark.square")
+                                .font(.title)
+                                .foregroundStyle(.green)
+                        }else{
+                            Image(systemName: "x.square")
+                                .font(.title)
+                                .foregroundStyle(.red)
+                        }
+                        if quiz == -1{
+                            Text("Not Taken")
+                                .font(.title)
+                        } else{
+                            Text("\(quiz)/5")
+                                .font(.title)
+                        }
+                    }
                 }
             }
         }
