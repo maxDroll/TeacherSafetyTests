@@ -15,48 +15,50 @@ struct StudentList: View {
     @State var selectedClass = ""
     @State var updatedClass = ""
     var body: some View {
-        ScrollView(.vertical){
-            TextField("Enter Class", text: $selectedClass)
-                .offset(x: 15)
-                .font(.title)
-                .onSubmit {
-                    updatedClass = selectedClass
-                }
-            VStack(spacing:0){
-                Rectangle()
-                    .foregroundStyle(.black)
-                    .frame(width: 500, height: 5)
-                if updatedClass == ""{
-                    Text("Please Enter A Class Code")
-                        .font(.title)
-                }
-                VStack(alignment: .leading, spacing:0){
-                    ForEach(students, id: \.name){student in
-                        if student.Class == updatedClass{
-                            Button {
-                                selectedStudent = student
-                            } label: {
-                                ZStack{
-                                    Text(student.name)
-                                        .frame(width: 450, height: 100, alignment: .leading)
-                                        .font(.system(size: 30))
-                                        .foregroundStyle(.black)
-                                    if selectedStudent.name == student.name && selectedStudent.Class == student.Class{
-                                        Rectangle()
-                                            .foregroundStyle(.blue)
-                                            .opacity(0.3)
-                                            .frame(width: 500, height: 100)
+        if let screenSize = UIScreen.main.bounds as CGRect? {
+            ScrollView(.vertical){
+                TextField("Enter Class", text: $selectedClass)
+                    .offset(x: 35)
+                    .font(.title)
+                    .onSubmit {
+                        updatedClass = selectedClass
+                    }
+                VStack(spacing:0){
+                    Rectangle()
+                        .foregroundStyle(.black)
+                        .frame(width: (screenSize.width * (5 / 12)), height: 5)
+                    if updatedClass == ""{
+                        Text("Please Enter A Class Code")
+                            .font(.title)
+                    }
+                    VStack(alignment: .leading, spacing:0){
+                        ForEach(students, id: \.name){student in
+                            if student.Class == updatedClass{
+                                Button {
+                                    selectedStudent = student
+                                } label: {
+                                    ZStack{
+                                        Text(student.name)
+                                            .frame(width: (screenSize.width * (5 / 12)) - 50, height: 100, alignment: .leading)
+                                            .font(.system(size: 30))
+                                            .foregroundStyle(.black)
+                                        if selectedStudent.name == student.name && selectedStudent.Class == student.Class{
+                                            Rectangle()
+                                                .foregroundStyle(.blue)
+                                                .opacity(0.3)
+                                                .frame(width: (screenSize.width * (5 / 12)), height: 100)
+                                        }
                                     }
+                                    .frame(width: (screenSize.width * (5 / 12)))
                                 }
-                                .frame(width: 500)
+                                Rectangle()
+                                    .foregroundStyle(.black)
+                                    .frame(width: (screenSize.width * (5 / 12)), height: 5)
                             }
-                            Rectangle()
-                                .foregroundStyle(.black)
-                                .frame(width: 500, height: 5)
                         }
                     }
+                    .frame(width: (screenSize.width * (5 / 12)))
                 }
-                .frame(width: 500)
             }
         }
     }

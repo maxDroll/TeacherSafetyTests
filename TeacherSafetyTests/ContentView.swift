@@ -49,6 +49,7 @@ struct ContentView: View {
                 .frame(width: 600)
             }
         }
+        .preferredColorScheme(.light)
     }
     
 }

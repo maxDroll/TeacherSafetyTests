@@ -14,32 +14,34 @@ struct MachineSelection: View {
     @FirestoreQuery(collectionPath: "Students") var students:[Student]
     @Binding var selectedMachine: String
     var body: some View {
-        VStack(spacing:0){
-            ForEach(machines, id: \.self){machine in
-                Button {
-                    selectedMachine = machine
-                } label: {
-                    ZStack{
-                        if selectedMachine == machine{
-                            Rectangle()
-                                .frame(width: 500, height: 203)
-                                .foregroundStyle(.blue)
-                                .opacity(0.3)
+        if let screenSize = UIScreen.main.bounds as CGRect? {
+            VStack(spacing:0){
+                ForEach(machines, id: \.self){machine in
+                    Button {
+                        selectedMachine = machine
+                    } label: {
+                        ZStack{
+                            if selectedMachine == machine{
+                                Rectangle()
+                                    .frame(width: (screenSize.width * (5 / 12)), height: 203)
+                                    .foregroundStyle(.blue)
+                                    .opacity(0.3)
+                            }
+                            Text(machine)
+                                .font(.system(size: 55))
+                                .frame(width: (screenSize.width * (5 / 12)) - 50, height: 203, alignment: .leading)
+                                .foregroundStyle(.black)
                         }
-                        Text(machine)
-                            .font(.system(size: 55))
-                            .frame(width: 450, height: 203, alignment: .leading)
+                    }
+                    if machine != "Angle Grinder"{
+                        Rectangle()
                             .foregroundStyle(.black)
+                            .frame(width: (screenSize.width * (5 / 12)), height: 5)
                     }
                 }
-                if machine != "Angle Grinder"{
-                    Rectangle()
-                        .foregroundStyle(.black)
-                        .frame(width: 500, height: 5)
-                }
             }
+            .frame(width: (screenSize.width * (5 / 12)))
+            .offset(y: -27)
         }
-        .frame(width: 500)
-        .offset(y: -23)
     }
 }

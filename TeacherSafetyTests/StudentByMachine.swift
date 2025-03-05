@@ -16,45 +16,47 @@ struct StudentByMachine: View {
     @State var updatedClass = ""
     @Binding var selectedMachine: String
     var body: some View {
-        if selectedMachine != ""{
-            ScrollView(.vertical){
-                VStack(spacing:0){
-                    TextField("Enter Class", text: $selectedClass)
-                        .offset(x: 15)
-                        .font(.title)
-                        .onSubmit {
-                            updatedClass = selectedClass
-                        }
-                    Rectangle()
-                        .foregroundStyle(.black)
-                        .frame(width: 700, height: 5)
-                    if updatedClass == ""{
-                        Spacer()
-                        Text("Please Enter a Class Code")
+        if let screenSize = UIScreen.main.bounds as CGRect? {
+            if selectedMachine != ""{
+                ScrollView(.vertical){
+                    VStack(spacing:0){
+                        TextField("Enter Class", text: $selectedClass)
+                            .offset(x: 15)
                             .font(.title)
-                    } else{
-                        ForEach(students, id: \.name){Stud in
-                            if Stud.Class == updatedClass{
-                                switch selectedMachine{
-                                case "Mille": StudentStat(name: Stud.name, quiz: Stud.MillTest, video: Stud.MillVideo)
-                                case "Angle Grinder": StudentStat(name: Stud.name, quiz: Stud.AngleGrinderTest, video: Stud.AngleGrinderVideo)
-                                case "Lathe": StudentStat(name: Stud.name, quiz: Stud.LatheTest, video: Stud.LatheVideo)
-                                default: StudentStat(name: Stud.name, quiz: Stud.WelderTest, video: Stud.WelderVideo)
+                            .onSubmit {
+                                updatedClass = selectedClass
+                            }
+                        Rectangle()
+                            .foregroundStyle(.black)
+                            .frame(width: (screenSize.width * (7 / 12)), height: 5)
+                        if updatedClass == ""{
+                            Spacer()
+                            Text("Please Enter a Class Code")
+                                .font(.title)
+                        } else{
+                            ForEach(students, id: \.name){Stud in
+                                if Stud.Class == updatedClass{
+                                    switch selectedMachine{
+                                    case "Mille": StudentStat(name: Stud.name, quiz: Stud.MillTest, video: Stud.MillVideo)
+                                    case "Angle Grinder": StudentStat(name: Stud.name, quiz: Stud.AngleGrinderTest, video: Stud.AngleGrinderVideo)
+                                    case "Lathe": StudentStat(name: Stud.name, quiz: Stud.LatheTest, video: Stud.LatheVideo)
+                                    default: StudentStat(name: Stud.name, quiz: Stud.WelderTest, video: Stud.WelderVideo)
+                                    }
+                                    Rectangle()
+                                        .foregroundStyle(.black)
+                                        .frame(width: (screenSize.width * (7 / 12)), height: 5)
                                 }
-                                Rectangle()
-                                    .foregroundStyle(.black)
-                                    .frame(width: 700, height: 5)
                             }
                         }
                     }
                 }
+                .frame(width: (screenSize.width * (7 / 12)))
             }
-            .frame(width: 700)
-        }
-        else{
-            Text("Please Select a Machine")
-                .font(.largeTitle)
-                .frame(width: 700)
+            else{
+                Text("Please Select a Machine")
+                    .font(.largeTitle)
+                    .frame(width: (screenSize.width * (7 / 12)))
+            }
         }
     }
     struct StudentStat: View {
