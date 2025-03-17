@@ -10,7 +10,7 @@ import Firebase
 import FirebaseFirestore
 
 struct MachineSelection: View {
-    let machines = ["Lathe", "Mille", "Welder", "Angle Grinder"]
+    let machines = ["Lathe", "Mill", "Welder", "Angle Grinder"]
     @FirestoreQuery(collectionPath: "Students") var students:[Student]
     @Binding var selectedMachine: String
     var body: some View {

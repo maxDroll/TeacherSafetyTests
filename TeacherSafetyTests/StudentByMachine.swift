@@ -37,7 +37,7 @@ struct StudentByMachine: View {
                             ForEach(students, id: \.name){Stud in
                                 if Stud.Class == updatedClass{
                                     switch selectedMachine{
-                                    case "Mille": StudentStat(name: Stud.name, quiz: Stud.MillTest, video: Stud.MillVideo)
+                                    case "Mill": StudentStat(name: Stud.name, quiz: Stud.MillTest, video: Stud.MillVideo)
                                     case "Angle Grinder": StudentStat(name: Stud.name, quiz: Stud.AngleGrinderTest, video: Stud.AngleGrinderVideo)
                                     case "Lathe": StudentStat(name: Stud.name, quiz: Stud.LatheTest, video: Stud.LatheVideo)
                                     default: StudentStat(name: Stud.name, quiz: Stud.WelderTest, video: Stud.WelderVideo)

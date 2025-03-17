@@ -11,7 +11,7 @@ import FirebaseFirestore
 
 struct StudentStats: View {
     @Binding var selectedStudent: Student
-    let machines = ["Lathe", "Mille", "Welder", "Angle Grinder"]
+    let machines = ["Lathe", "Mill", "Welder", "Angle Grinder"]
     var body: some View {
         if let screenSize = UIScreen.main.bounds as CGRect? {
             if selectedStudent.name == "XXXXX" && selectedStudent.Class == "XXXXX"{
