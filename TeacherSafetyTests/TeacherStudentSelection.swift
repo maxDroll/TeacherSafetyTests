@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct TeacherStudentSelectionOrganizer: View {
-    @State var selectedStudent: Student = Student(AngleGrinderTest: -1, AngleGrinderVideo: false, Class: "XXXXX", LatheTest: -1, LatheVideo: false, MillTest: -1, MillVideo: false, WelderTest: -1, WelderVideo: false, name: "XXXXX", Teacher: false)
+    @State var selectedStudent: Student = Student(AngleGrinderTest: -1, AngleGrinderVideo: false, Class: "XXXXX", LatheTest: -1, LatheVideo: false, MillTest: -1, MillVideo: false, WelderTest: -1, WelderVideo: false, name: "XXXXX", Teacher: false, StudentID: "000001")
     @Binding var selectedSorting: String
     @State var selectedMachine = ""
     var body: some View {

@@ -19,4 +19,5 @@ struct Student: Decodable{
     var WelderVideo: Bool
     var name: String
     var Teacher: Bool
+    var StudentID: String
 }
