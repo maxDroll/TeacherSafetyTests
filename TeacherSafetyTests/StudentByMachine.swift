@@ -16,7 +16,7 @@ struct StudentByMachine: View {
     @State var updatedClass = ""
     @Binding var selectedMachine: String
     var body: some View {
-        GeometryReader{ geometry in
+        if let screenSize = UIScreen.main.bounds as CGRect? {
             if selectedMachine != ""{
                 ScrollView(.vertical){
                     VStack(spacing:0){
@@ -28,7 +28,7 @@ struct StudentByMachine: View {
                             }
                         Rectangle()
                             .foregroundStyle(.black)
-                            .frame(width: (geometry.size.width * (7 / 12)), height: 5)
+                            .frame(width: (screenSize.width * (7 / 12)), height: 5)
                         if updatedClass == ""{
                             Spacer()
                             Text("Please Enter a Class Code")
@@ -44,18 +44,18 @@ struct StudentByMachine: View {
                                     }
                                     Rectangle()
                                         .foregroundStyle(.black)
-                                        .frame(width: (geometry.size.width * (7 / 12)), height: 5)
+                                        .frame(width: (screenSize.width * (7 / 12)), height: 5)
                                 }
                             }
                         }
                     }
                 }
-                .frame(width: (geometry.size.width * (7 / 12)))
+                .frame(width: (screenSize.width * (7 / 12)))
             }
             else{
                 Text("Please Select a Machine")
                     .font(.largeTitle)
-                    .frame(width: (geometry.size.width * (7 / 12)))
+                    .frame(width: (screenSize.width * (7 / 12)))
             }
         }
     }

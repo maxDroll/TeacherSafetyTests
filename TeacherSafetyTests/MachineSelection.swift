@@ -14,7 +14,7 @@ struct MachineSelection: View {
     @FirestoreQuery(collectionPath: "Students") var students:[Student]
     @Binding var selectedMachine: String
     var body: some View {
-        GeometryReader{ geometry in
+        if let screenSize = UIScreen.main.bounds as CGRect? {
             VStack(spacing:0){
                 ForEach(machines, id: \.self){machine in
                     Button {
@@ -23,24 +23,24 @@ struct MachineSelection: View {
                         ZStack{
                             if selectedMachine == machine{
                                 Rectangle()
-                                    .frame(width: (geometry.size.width * (5 / 12)), height: 203)
+                                    .frame(width: (screenSize.width * (5 / 12)), height: 203)
                                     .foregroundStyle(.blue)
                                     .opacity(0.3)
                             }
                             Text(machine)
                                 .font(.system(size: 55))
-                                .frame(width: (geometry.size.width * (5 / 12)) - 50, height: 203, alignment: .leading)
+                                .frame(width: (screenSize.width * (5 / 12)) - 50, height: 203, alignment: .leading)
                                 .foregroundStyle(.black)
                         }
                     }
                     if machine != "Angle Grinder"{
                         Rectangle()
                             .foregroundStyle(.black)
-                            .frame(width: (geometry.size.width * (5 / 12)), height: 5)
+                            .frame(width: (screenSize.width * (5 / 12)), height: 5)
                     }
                 }
             }
-            .frame(width: (geometry.size.width * (5 / 12)))
+            .frame(width: (screenSize.width * (5 / 12)))
             .offset(y: -27)
         }
     }
