@@ -13,15 +13,15 @@ struct StudentStats: View {
     @Binding var selectedStudent: Student
     let machines = ["Lathe", "Mill", "Welder", "Angle Grinder"]
     var body: some View {
-        if let screenSize = UIScreen.main.bounds as CGRect? {
+        GeometryReader{ geometry in
             if selectedStudent.name == "XXXXX" && selectedStudent.Class == "XXXXX"{
                 Text("Please Select a Student")
                     .font(.largeTitle)
-                    .frame(width:(screenSize.width * (7 / 12)))
+                    .frame(width:(geometry.size.width * (7 / 12)))
             }else{
                 VStack{
                     Text(selectedStudent.name)
-                        .frame(width:(screenSize.width * (7 / 12)) - 100,alignment: .trailing)
+                        .frame(width:(geometry.size.width * (7 / 12)) - 100,alignment: .trailing)
                         .font(.title)
                         .offset(y: 75)
                     machine(machineVideo: selectedStudent.LatheVideo, machineTest: selectedStudent.LatheTest, machineName: "Lathe")
@@ -29,7 +29,7 @@ struct StudentStats: View {
                     machine(machineVideo: selectedStudent.WelderVideo, machineTest: selectedStudent.WelderTest, machineName: "Welder")
                     machine(machineVideo: selectedStudent.AngleGrinderVideo, machineTest: selectedStudent.AngleGrinderTest, machineName: "Angle Grinder")
                 }
-                .frame(width: (screenSize.width * (7 / 12)))
+                .frame(width: (geometry.size.width * (7 / 12)))
                 .offset(y: -50)
             }
         }
@@ -39,7 +39,7 @@ struct StudentStats: View {
         let machineTest: Int
         let machineName: String
         var body: some View {
-            if let screenSize = UIScreen.main.bounds as CGRect? {
+            GeometryReader { geometry in
                 Text(machineName)
                     .font(.largeTitle)
                     .frame(height: 78)
@@ -73,7 +73,7 @@ struct StudentStats: View {
                 if machineName != "Angle Grinder"{
                     Rectangle()
                         .foregroundStyle(.black)
-                        .frame(width: (screenSize.width * (7 / 12)), height: 5)
+                        .frame(width: (geometry.size.width * (7 / 12)), height: 5)
                 }
             }
         }
