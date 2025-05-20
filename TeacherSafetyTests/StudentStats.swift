@@ -24,10 +24,10 @@ struct StudentStats: View {
                         .frame(width:(screenSize.width * (7 / 12)) - 100,alignment: .trailing)
                         .font(.title)
                         .offset(y: 75)
-                    machine(machineVideo: selectedStudent.LatheVideo, machineTest: selectedStudent.LatheTest, machineName: "Lathe")
-                    machine(machineVideo: selectedStudent.MillVideo, machineTest: selectedStudent.MillTest, machineName: "Mill")
-                    machine(machineVideo: selectedStudent.WelderVideo, machineTest: selectedStudent.WelderTest, machineName: "Welder")
-                    machine(machineVideo: selectedStudent.AngleGrinderVideo, machineTest: selectedStudent.AngleGrinderTest, machineName: "Angle Grinder")
+                    machine(machineVideo: selectedStudent.LatheVideo, machineTest: selectedStudent.LatheTest, machineName: "Lathe", numberOfQuestions: 12)
+                    machine(machineVideo: selectedStudent.MillVideo, machineTest: selectedStudent.MillTest, machineName: "Mill", numberOfQuestions: 12)
+                    machine(machineVideo: selectedStudent.WelderVideo, machineTest: selectedStudent.WelderTest, machineName: "Welder", numberOfQuestions: 14)
+                    machine(machineVideo: selectedStudent.AngleGrinderVideo, machineTest: selectedStudent.AngleGrinderTest, machineName: "Angle Grinder", numberOfQuestions: 12)
                 }
                 .frame(width: (screenSize.width * (7 / 12)))
                 .offset(y: -50)
@@ -38,6 +38,7 @@ struct StudentStats: View {
         let machineVideo: Bool
         let machineTest: Int
         let machineName: String
+        let numberOfQuestions: Int
         var body: some View {
             if let screenSize = UIScreen.main.bounds as CGRect? {
                 Text(machineName)
@@ -65,7 +66,7 @@ struct StudentStats: View {
                             Text("Not Taken")
                                 .font(.title)
                         }else{
-                            Text("\(machineTest)/5")
+                            Text("\(machineTest)/\(numberOfQuestions)")
                                 .font(.title)
                         }
                     }

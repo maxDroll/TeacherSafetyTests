@@ -37,10 +37,10 @@ struct StudentByMachine: View {
                             ForEach(students, id: \.name){Stud in
                                 if Stud.Class == updatedClass{
                                     switch selectedMachine{
-                                    case "Mill": StudentStat(name: Stud.name, quiz: Stud.MillTest, video: Stud.MillVideo)
-                                    case "Angle Grinder": StudentStat(name: Stud.name, quiz: Stud.AngleGrinderTest, video: Stud.AngleGrinderVideo)
-                                    case "Lathe": StudentStat(name: Stud.name, quiz: Stud.LatheTest, video: Stud.LatheVideo)
-                                    default: StudentStat(name: Stud.name, quiz: Stud.WelderTest, video: Stud.WelderVideo)
+                                    case "Mill": StudentStat(name: Stud.name, quiz: Stud.MillTest, video: Stud.MillVideo, numberOfQuestions: 12)
+                                    case "Angle Grinder": StudentStat(name: Stud.name, quiz: Stud.AngleGrinderTest, video: Stud.AngleGrinderVideo, numberOfQuestions: 12)
+                                    case "Lathe": StudentStat(name: Stud.name, quiz: Stud.LatheTest, video: Stud.LatheVideo, numberOfQuestions: 12)
+                                    default: StudentStat(name: Stud.name, quiz: Stud.WelderTest, video: Stud.WelderVideo, numberOfQuestions: 14)
                                     }
                                     Rectangle()
                                         .foregroundStyle(.black)
@@ -63,13 +63,14 @@ struct StudentByMachine: View {
         let name: String
         let quiz: Int
         let video: Bool
+        let numberOfQuestions: Int
         var body: some View {
             VStack(spacing:10){
                 Text(name)
                     .font(.largeTitle)
                 HStack(spacing:100){
                     VStack{
-                        Text("Watched Quiz?")
+                        Text("Watched Video?")
                             .font(.title)
                         Text("Quiz Score")
                             .font(.title)
@@ -88,7 +89,7 @@ struct StudentByMachine: View {
                             Text("Not Taken")
                                 .font(.title)
                         } else{
-                            Text("\(quiz)/5")
+                            Text("\(quiz)/\(numberOfQuestions)")
                                 .font(.title)
                         }
                     }
