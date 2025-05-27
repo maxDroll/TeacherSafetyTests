@@ -22,8 +22,8 @@ struct StudentStats: View {
                 VStack{
                     Text(selectedStudent.name)
                         .frame(width:(screenSize.width * (7 / 12)) - 100,alignment: .trailing)
-                        .font(.title)
-                        .offset(y: 85)
+                        .font(.title2)
+                        .offset(x: 20,y: 85)
                     machine(machineVideo: selectedStudent.LatheVideo, machineTest: selectedStudent.LatheTest, machineName: "Lathe", numberOfQuestions: 12)
                     machine(machineVideo: selectedStudent.MillVideo, machineTest: selectedStudent.MillTest, machineName: "Mill", numberOfQuestions: 12)
                     machine(machineVideo: selectedStudent.WelderVideo, machineTest: selectedStudent.WelderTest, machineName: "Welder", numberOfQuestions: 14)
@@ -49,8 +49,13 @@ struct StudentStats: View {
                         VStack(spacing: 18){
                             Text("Video Status")
                                 .font(.title)
-                            Text("Test Score")
-                                .font(.title)
+                            if machineName != "Angle Grinder"{
+                                Text("Test Score")
+                                    .font(.title)
+                            } else{
+                                Text("")
+                                    .font(.title)
+                            }
                         }
                         .frame(width: 180)
                         VStack(spacing: 18){
@@ -63,11 +68,16 @@ struct StudentStats: View {
                                     .font(.title)
                                     .foregroundStyle(.red)
                             }
-                            if machineTest == -1{
-                                Text("Not Taken")
-                                    .font(.title)
+                            if machineName != "Angle Grinder"{
+                                if machineTest == -1{
+                                    Text("Not Taken")
+                                        .font(.title)
+                                }else{
+                                    Text("\(machineTest)/\(numberOfQuestions)")
+                                        .font(.title)
+                                }
                             }else{
-                                Text("\(machineTest)/\(numberOfQuestions)")
+                                Text("")
                                     .font(.title)
                             }
                         }
@@ -78,7 +88,7 @@ struct StudentStats: View {
                             .frame(width: (screenSize.width * (7 / 12)), height: 5)
                     }
                 }
-                .offset(y:20)
+                .offset(y:25)
             }
         }
     }
