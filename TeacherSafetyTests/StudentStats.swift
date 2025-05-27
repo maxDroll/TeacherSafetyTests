@@ -23,7 +23,7 @@ struct StudentStats: View {
                     Text(selectedStudent.name)
                         .frame(width:(screenSize.width * (7 / 12)) - 100,alignment: .trailing)
                         .font(.title)
-                        .offset(y: 75)
+                        .offset(y: 85)
                     machine(machineVideo: selectedStudent.LatheVideo, machineTest: selectedStudent.LatheTest, machineName: "Lathe", numberOfQuestions: 12)
                     machine(machineVideo: selectedStudent.MillVideo, machineTest: selectedStudent.MillTest, machineName: "Mill", numberOfQuestions: 12)
                     machine(machineVideo: selectedStudent.WelderVideo, machineTest: selectedStudent.WelderTest, machineName: "Welder", numberOfQuestions: 14)
@@ -41,41 +41,44 @@ struct StudentStats: View {
         let numberOfQuestions: Int
         var body: some View {
             if let screenSize = UIScreen.main.bounds as CGRect? {
-                Text(machineName)
-                    .font(.largeTitle)
-                    .frame(height: 78)
-                HStack{
-                    VStack(spacing: 20){
-                        Text("Video Status")
-                            .font(.title)
-                        Text("Test Score")
-                            .font(.title)
-                    }
-                    .frame(width: 200)
-                    VStack(spacing: 20){
-                        if machineVideo{
-                            Image(systemName: "checkmark.square")
+                VStack{
+                    Text(machineName)
+                        .font(.largeTitle)
+                        .frame(height: 70)
+                    HStack{
+                        VStack(spacing: 18){
+                            Text("Video Status")
                                 .font(.title)
-                                .foregroundStyle(.green)
-                        }else{
-                            Image(systemName: "x.square")
-                                .font(.title)
-                                .foregroundStyle(.red)
-                        }
-                        if machineTest == -1{
-                            Text("Not Taken")
-                                .font(.title)
-                        }else{
-                            Text("\(machineTest)/\(numberOfQuestions)")
+                            Text("Test Score")
                                 .font(.title)
                         }
+                        .frame(width: 180)
+                        VStack(spacing: 18){
+                            if machineVideo{
+                                Image(systemName: "checkmark.square")
+                                    .font(.title)
+                                    .foregroundStyle(.green)
+                            }else{
+                                Image(systemName: "x.square")
+                                    .font(.title)
+                                    .foregroundStyle(.red)
+                            }
+                            if machineTest == -1{
+                                Text("Not Taken")
+                                    .font(.title)
+                            }else{
+                                Text("\(machineTest)/\(numberOfQuestions)")
+                                    .font(.title)
+                            }
+                        }
+                    }
+                    if machineName != "Angle Grinder"{
+                        Rectangle()
+                            .foregroundStyle(.black)
+                            .frame(width: (screenSize.width * (7 / 12)), height: 5)
                     }
                 }
-                if machineName != "Angle Grinder"{
-                    Rectangle()
-                        .foregroundStyle(.black)
-                        .frame(width: (screenSize.width * (7 / 12)), height: 5)
-                }
+                .offset(y:20)
             }
         }
     }
